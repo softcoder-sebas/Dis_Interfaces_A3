@@ -14,6 +14,7 @@
                 <ul class="nav__list">
                     <li><a href="#proyecto" class="nav__link" aria-label="Ir a sección del proyecto">Proyecto</a></li>
                     <li><a href="#integrantes" class="nav__link" aria-label="Ir a sección de integrantes">Integrantes</a></li>
+                    <li><a href="#progreso" class="nav__link" aria-label="Ir a panel de progreso">Progreso</a></li>
                     <li><a href="#cronograma" class="nav__link" aria-label="Ir a cronograma">Cronograma</a></li>
                     <li><a href="#tareas" class="nav__link" aria-label="Ir a tareas">Tareas</a></li>
                 </ul>
@@ -117,6 +118,154 @@
             </div>
         </section>
 
+        <section id="progreso" class="section section--progress">
+            <div class="container">
+                <h2 class="section__title">Panel de Progreso</h2>
+                
+                <!-- Overall Progress with Explanation -->
+                <div class="overall-progress">
+                    <div class="progress-card progress-card--main">
+                        <h3 class="progress-card__title">Progreso General del Proyecto</h3>
+                        <div class="progress-explanation">
+                            <p class="progress-explanation__text">
+                                El progreso actual del <strong>35%</strong> se basa en las tareas completadas de la Fase 1: 
+                                definición de arquitectura y creación de wireframes iniciales. Actualmente trabajamos en 
+                                la investigación de tecnologías y documentación de requerimientos.
+                            </p>
+                        </div>
+                        <div class="circular-progress" data-progress="35">
+                            <svg class="circular-progress__svg" viewBox="0 0 120 120">
+                                <circle class="circular-progress__track" cx="60" cy="60" r="50"/>
+                                <circle class="circular-progress__fill" cx="60" cy="60" r="50"/>
+                            </svg>
+                            <div class="circular-progress__text">
+                                <span class="circular-progress__percentage">35%</span>
+                                <span class="circular-progress__label">Completado</span>
+                            </div>
+                        </div>
+                        <div class="fluid-progress">
+                            <div class="fluid-progress__bar">
+                                <div class="fluid-progress__fill" data-progress="35"></div>
+                                <div class="fluid-progress__particles">
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                    <div class="particle"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced achievements milestone path with improved graphics -->
+                <div class="achievements">
+                    <h3 class="achievements__title">Camino de Logros</h3>
+                    <div class="milestone-path-enhanced">
+                        <svg class="milestone-path__canvas" viewBox="0 0 1000 300">
+                            <!-- Background decorative elements -->
+                            <defs>
+                                <linearGradient id="pathGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" style="stop-color:#dc2626;stop-opacity:0.8" />
+                                    <stop offset="35%" style="stop-color:#dc2626;stop-opacity:1" />
+                                    <stop offset="35.1%" style="stop-color:#94a3b8;stop-opacity:0.4" />
+                                    <stop offset="100%" style="stop-color:#94a3b8;stop-opacity:0.4" />
+                                </linearGradient>
+                                <filter id="glow">
+                                    <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                    <feMerge> 
+                                        <feMergeNode in="coloredBlur"/>
+                                        <feMergeNode in="SourceGraphic"/>
+                                    </feMerge>
+                                </filter>
+                            </defs>
+                            
+                            <!-- Decorative background shapes -->
+                            <circle cx="100" cy="150" r="30" fill="rgba(220, 38, 38, 0.05)" class="bg-shape bg-shape--1"/>
+                            <polygon points="300,80 320,120 280,120" fill="rgba(220, 38, 38, 0.05)" class="bg-shape bg-shape--2"/>
+                            <rect x="500" y="200" width="40" height="40" rx="8" fill="rgba(220, 38, 38, 0.05)" class="bg-shape bg-shape--3"/>
+                            <circle cx="750" cy="100" r="25" fill="rgba(220, 38, 38, 0.05)" class="bg-shape bg-shape--4"/>
+                            
+                            <!-- Main path -->
+                            <path class="milestone-path__track-enhanced" 
+                                  d="M80,150 Q200,100 350,150 Q500,200 650,150 Q800,100 920,150" 
+                                  fill="none" stroke="#e2e8f0" stroke-width="6"/>
+                            <path class="milestone-path__progress-enhanced" 
+                                  d="M80,150 Q200,100 350,150 Q500,200 650,150 Q800,100 920,150" 
+                                  fill="none" stroke="url(#pathGradient)" stroke-width="6" filter="url(#glow)"/>
+                            
+                            <!-- Progress indicator -->
+                            <circle class="progress-indicator" cx="350" cy="150" r="8" fill="#dc2626">
+                                <animate attributeName="r" values="8;12;8" dur="2s" repeatCount="indefinite"/>
+                                <animate attributeName="opacity" values="1;0.7;1" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </svg>
+                        
+                        <div class="milestones-enhanced">
+                            <div class="milestone-enhanced milestone-enhanced--completed" data-milestone="1" style="left: 8%">
+                                <div class="milestone-enhanced__icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="3"/>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="milestone-enhanced__content">
+                                    <h4 class="milestone-enhanced__title">Arquitectura Definida</h4>
+                                    <p class="milestone-enhanced__description">Sistema base establecido</p>
+                                    <div class="milestone-enhanced__progress">100%</div>
+                                </div>
+                                <div class="milestone-enhanced__glow"></div>
+                            </div>
+                            
+                            <div class="milestone-enhanced milestone-enhanced--completed" data-milestone="2" style="left: 35%">
+                                <div class="milestone-enhanced__icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                        <path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="3"/>
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="milestone-enhanced__content">
+                                    <h4 class="milestone-enhanced__title">Wireframes Creados</h4>
+                                    <p class="milestone-enhanced__description">Interfaces diseñadas</p>
+                                    <div class="milestone-enhanced__progress">100%</div>
+                                </div>
+                                <div class="milestone-enhanced__glow"></div>
+                            </div>
+                            
+                            <div class="milestone-enhanced milestone-enhanced--active" data-milestone="3" style="left: 65%">
+                                <div class="milestone-enhanced__icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="milestone-enhanced__content">
+                                    <h4 class="milestone-enhanced__title">Desarrollo en Curso</h4>
+                                    <p class="milestone-enhanced__description">Implementando funcionalidades</p>
+                                    <div class="milestone-enhanced__progress">35%</div>
+                                </div>
+                                <div class="milestone-enhanced__pulse"></div>
+                            </div>
+                            
+                            <div class="milestone-enhanced milestone-enhanced--pending" data-milestone="4" style="left: 92%">
+                                <div class="milestone-enhanced__icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                                        <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2"/>
+                                        <path d="M8 12h8" stroke="currentColor" stroke-width="2"/>
+                                    </svg>
+                                </div>
+                                <div class="milestone-enhanced__content">
+                                    <h4 class="milestone-enhanced__title">Testing & QA</h4>
+                                    <p class="milestone-enhanced__description">Pruebas y validación</p>
+                                    <div class="milestone-enhanced__progress">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="cronograma" class="section section--timeline">
             <div class="container">
                 <h2 class="section__title">Cronograma del Proyecto</h2>
@@ -210,6 +359,8 @@
             <p>&copy; 2025 ERP Mercado Minorista - Documentación del Proyecto</p>
         </div>
     </footer>
+
+    <div class="celebration-confetti" id="celebration-confetti"></div>
 
     <script src="app.js"></script>
 </body>

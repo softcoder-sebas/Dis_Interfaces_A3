@@ -66,6 +66,21 @@ const tasksData = [
   },
 ]
 
+// Datos de progreso
+const progressData = {
+  overall: 35,
+  teamMembers: {
+    Ariadna: 50,
+    "José Camilo": 30,
+    Sebastián: 25,
+  },
+  achievements: [
+    { id: 1, title: "Primera Fase Completada", completed: true },
+    { id: 2, title: "Diseño Innovador", completed: true },
+    { id: 3, title: "Velocidad de Desarrollo", completed: true },
+  ],
+}
+
 // Estado de la aplicación
 let currentTasks = [...tasksData]
 let currentTheme = localStorage.getItem("theme") || "light"
@@ -80,6 +95,7 @@ const elements = {
   themeToggle: document.querySelector(".theme-toggle"),
   printBtn: document.querySelector(".print-btn"),
   navLinks: document.querySelectorAll(".nav__link"),
+  celebrationConfetti: document.getElementById("celebration-confetti"),
 }
 
 // Inicialización
@@ -94,6 +110,7 @@ function initializeApp() {
   setupScrollEffects()
   setupNavigation()
   animateOnLoad()
+  initializeProgress()
 }
 
 // Configuración del tema
@@ -295,7 +312,9 @@ function updateActiveNavigation() {
 // Animaciones de carga
 function animateOnLoad() {
   // Animar elementos con retraso escalonado
-  const animatedElements = document.querySelectorAll(".team-member, .timeline__phase, .tech-item")
+  const animatedElements = document.querySelectorAll(
+    ".team-member, .timeline__phase, .tech-item, .achievement-card, .milestone",
+  )
 
   const observer = new IntersectionObserver(
     (entries) => {
@@ -314,6 +333,90 @@ function animateOnLoad() {
   animatedElements.forEach((element) => {
     observer.observe(element)
   })
+}
+
+// Funcionalidad de progreso
+function initializeProgress() {
+  // Animate progress bars when section comes into view
+  const progressSection = document.getElementById("progreso")
+  if (progressSection) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateProgressBars()
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.3 },
+    )
+
+    observer.observe(progressSection)
+  }
+}
+
+function animateProgressBars() {
+  // Animate circular progress
+  const circularProgress = document.querySelector(".circular-progress__fill")
+  if (circularProgress) {
+    const progress = progressData.overall
+    const circumference = 2 * Math.PI * 50
+    const offset = circumference - (progress / 100) * circumference
+
+    setTimeout(() => {
+      circularProgress.style.strokeDashoffset = offset
+    }, 500)
+  }
+
+  // Animate fluid progress bar
+  const fluidProgress = document.querySelector(".fluid-progress__fill")
+  if (fluidProgress) {
+    setTimeout(() => {
+      fluidProgress.style.width = `${progressData.overall}%`
+    }, 800)
+  }
+
+  const milestones = document.querySelectorAll(".milestone-enhanced")
+  milestones.forEach((milestone, index) => {
+    setTimeout(
+      () => {
+        milestone.style.animationPlayState = "running"
+      },
+      1000 + index * 500,
+    )
+  })
+
+  // Check for celebration
+  if (progressData.overall >= 100) {
+    setTimeout(() => {
+      triggerCelebration()
+    }, 2000)
+  }
+}
+
+function triggerCelebration() {
+  const confettiContainer = elements.celebrationConfetti
+  if (!confettiContainer) return
+
+  confettiContainer.style.opacity = "1"
+
+  // Create confetti pieces
+  for (let i = 0; i < 50; i++) {
+    const confetti = document.createElement("div")
+    confetti.className = "confetti-piece"
+    confetti.style.left = Math.random() * 100 + "%"
+    confetti.style.animationDelay = Math.random() * 3 + "s"
+    confetti.style.animationDuration = Math.random() * 2 + 2 + "s"
+
+    confettiContainer.appendChild(confetti)
+  }
+
+  // Clean up confetti after animation
+  setTimeout(() => {
+    confettiContainer.style.opacity = "0"
+    confettiContainer.innerHTML = ""
+  }, 5000)
 }
 
 // Utilidades
@@ -371,5 +474,8 @@ if (typeof module !== "undefined" && module.exports) {
     renderTasks,
     toggleTheme,
     tasksData,
+    animateProgressBars,
+    triggerCelebration,
+    progressData,
   }
 }
