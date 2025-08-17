@@ -75,9 +75,49 @@ const progressData = {
     Sebastián: 25,
   },
   achievements: [
-    { id: 1, title: "Primera Fase Completada", completed: true },
-    { id: 2, title: "Diseño Innovador", completed: true },
-    { id: 3, title: "Velocidad de Desarrollo", completed: true },
+    {
+      id: 1,
+      title: "Lluvia de Ideas Completada",
+      completed: true,
+      description: "Sesiones de brainstorming realizadas exitosamente",
+    },
+    {
+      id: 2,
+      title: "Requerimientos Definidos",
+      completed: true,
+      description: "Análisis y documentación de necesidades del ERP",
+    },
+    {
+      id: 3,
+      title: "Bocetos en Papel Creados",
+      completed: true,
+      description: "Primeras ideas plasmadas en sketches físicos",
+    },
+    {
+      id: 4,
+      title: "Wireframes en Figma",
+      completed: true,
+      description: "Diseños digitales estructurados y organizados",
+    },
+    {
+      id: 5,
+      title: "Arquitectura del Sistema",
+      completed: false,
+      description: "Definición técnica de módulos y componentes",
+    },
+    {
+      id: 6,
+      title: "Investigación de Tecnologías",
+      completed: false,
+      description: "Evaluación de herramientas y frameworks",
+    },
+    {
+      id: 7,
+      title: "Documentación Técnica",
+      completed: false,
+      description: "Especificaciones detalladas del proyecto",
+    },
+    { id: 8, title: "Prototipo Funcional", completed: false, description: "Primera versión interactiva del ERP" },
   ],
 }
 
@@ -93,7 +133,6 @@ const elements = {
   emptyState: document.getElementById("empty-state"),
   backToTop: document.getElementById("back-to-top"),
   themeToggle: document.querySelector(".theme-toggle"),
-  printBtn: document.querySelector(".print-btn"),
   navLinks: document.querySelectorAll(".nav__link"),
   celebrationConfetti: document.getElementById("celebration-confetti"),
 }
@@ -146,7 +185,6 @@ function setupEventListeners() {
   elements.memberFilter.addEventListener("change", filterTasks)
   elements.backToTop.addEventListener("click", scrollToTop)
   elements.themeToggle.addEventListener("click", toggleTheme)
-  elements.printBtn.addEventListener("click", () => window.print())
 
   // Navegación por teclado
   document.addEventListener("keydown", handleKeyboardNavigation)
@@ -367,14 +405,6 @@ function animateProgressBars() {
     setTimeout(() => {
       circularProgress.style.strokeDashoffset = offset
     }, 500)
-  }
-
-  // Animate fluid progress bar
-  const fluidProgress = document.querySelector(".fluid-progress__fill")
-  if (fluidProgress) {
-    setTimeout(() => {
-      fluidProgress.style.width = `${progressData.overall}%`
-    }, 800)
   }
 
   const milestones = document.querySelectorAll(".milestone-enhanced")
