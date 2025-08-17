@@ -1075,30 +1075,33 @@ body {
 
 /* Milestone Path */
 .milestone-path {
+  display: flex;
+  gap: 1.5rem;
+  padding: 1rem;
   position: relative;
-  margin-bottom: 3rem;
-}
-
-.milestone-path__line {
-  width: 100%;
-  height: 200px;
-  margin-bottom: 2rem;
+  z-index: 2; /* arriba del canvas svg */
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center; /* alinear verticalmente */
+  flex-wrap: nowrap; /* mantener en una sola línea en desktop */
 }
 
 .milestone-path__track {
-  fill: none;
-  stroke: var(--color-border);
-  stroke-width: 3;
-}
-
-.milestone-path__progress {
-  fill: none;
-  stroke: var(--color-primary);
-  stroke-width: 3;
-  stroke-dasharray: 1000;
-  stroke-dashoffset: 1000;
-  animation: drawPath 3s ease-out forwards;
-  filter: drop-shadow(0 0 5px rgba(220, 38, 38, 0.3));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  animation: milestoneAppear 0.8s ease-out forwards;
+  position: relative;
+  padding: 1.25rem;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  min-width: 200px; /* asegurar tamaño homogéneo */
+  flex: 1 1 0; /* permitir que los 4 items se repartan el espacio */
 }
 
 @keyframes drawPath {
@@ -1110,13 +1113,12 @@ body {
 .milestones {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, auto);
   gap: 2rem;
+  padding: 2rem;
   position: relative;
-  width: 100%;
-  max-width: 800px;
+  z-index: 1;
+  max-width: 1200px;
   margin: 0 auto;
-  padding: 1rem;
 }
 
 .milestone {
@@ -1236,7 +1238,7 @@ body {
 
 .milestone__content {
   text-align: center;
-  max-width: 150px;
+  max-width: 220px;
 }
 
 .milestone__title {
@@ -1272,6 +1274,86 @@ body {
   background: radial-gradient(circle, rgba(220, 38, 38, 0.2) 0%, transparent 70%);
   z-index: 1;
   animation: glow 2s ease-in-out infinite alternate;
+}
+
+/* Styles specific for the enhanced milestones layout */
+.milestone-path-enhanced {
+  position: relative;
+}
+
+.milestone-path-enhanced .milestone-path__canvas {
+  width: 100%;
+  height: 200px;
+  display: block;
+}
+
+.milestones-enhanced {
+  margin-top: 40px; /* sit the cards below the path */
+  background: transparent;
+  display: flex;
+  gap: 1.25rem;
+  padding: 0.75rem 1rem;
+  position: relative;
+  z-index: 2; /* sit above the svg canvas */
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap; /* keep 4 in one row when possible */
+  overflow-x: auto; /* allow horizontal scroll on narrow viewports */
+}
+
+/* Ensure the milestone cards show inline (icon + text) and have no box */
+.milestone-enhanced {
+  display: flex;
+  flex-direction: row; /* icon + content side-by-side */
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  background: transparent; /* remove box */
+  border: none; /* remove border */
+  border-radius: 0;
+  min-width: 220px; /* ensure consistent sizing */
+  flex: 0 0 22%;
+}
+
+.milestone-enhanced__icon {
+  margin: 0 0.75rem 0 0;
+  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.milestone-enhanced__content {
+  max-width: 260px;
+}
+
+/* Make sure the four items occupy equal width on larger screens */
+@media (min-width: 900px) {
+  .milestones-enhanced {
+    gap: 1rem;
+  }
+  .milestone-enhanced {
+    flex: 0 0 calc(25% - 1rem);
+  }
+}
+
+/* On smaller screens keep them in a single horizontal row with scroll */
+@media (max-width: 899px) {
+  .milestones-enhanced {
+    flex-wrap: nowrap;
+    gap: 0.75rem;
+    justify-content: flex-start;
+  }
+  .milestone-enhanced {
+    flex: 0 0 220px;
+    padding: 0.5rem 0.75rem;
+  }
+  .milestones-enhanced {
+    margin-top: 20px;
+  }
 }
 
 @keyframes glow {
@@ -1319,23 +1401,45 @@ body {
 
 /* Achievement Cards */
 .achievement-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  flex-wrap: nowrap;
   gap: 2rem;
-  max-width: 900px;
-  margin: 0 auto;
+  margin-top: 2rem;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-surface);
+}
+
+/* Estilos para la barra de scroll en navegadores webkit */
+.achievement-cards::-webkit-scrollbar {
+  height: 8px;
+}
+
+.achievement-cards::-webkit-scrollbar-track {
+  background: var(--color-surface);
+  border-radius: 4px;
+}
+
+.achievement-cards::-webkit-scrollbar-thumb {
+  background-color: var(--color-primary);
+  border-radius: 4px;
+  border: 2px solid var(--color-surface);
 }
 
 .achievement-card {
-  background: var(--color-background);
+  flex: 0 0 300px;
+  scroll-snap-align: start;
+  background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--border-radius);
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
-  position: relative;
   transition: var(--transition);
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
 }
 
 .achievement-card--bounce {
@@ -1351,48 +1455,44 @@ body {
 }
 
 .achievement-card:hover {
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: var(--shadow-lg);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
   border-color: var(--color-primary);
 }
 
 .achievement-card__icon {
-  width: 60px;
-  height: 60px;
-  background: var(--color-primary-lighter);
-  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 1rem;
+  color: var(--color-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
-  color: var(--color-primary);
 }
 
 .achievement-card__title {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75rem;
   color: var(--color-text);
 }
 
 .achievement-card__description {
+  font-size: 0.875rem;
   color: var(--color-text-secondary);
-  margin-bottom: 1rem;
+  line-height: 1.5;
 }
 
 .achievement-card__badge {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  width: 40px;
-  height: 40px;
-  background: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  font-size: 1.25rem;
-  animation: badgePulse 2s infinite;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--color-primary-lighter);
+  color: var(--color-primary);
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin-top: 1rem;
 }
 
 @keyframes bounceIn {
