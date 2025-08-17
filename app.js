@@ -287,14 +287,7 @@ function setupScrollEffects() {
 
 function handleScroll() {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-
-  // Mostrar/ocultar botón volver arriba
-  if (scrollTop > 300) {
-    elements.backToTop.classList.add("visible")
-  } else {
-    elements.backToTop.classList.remove("visible")
-  }
-
+  
   // Actualizar navegación activa
   updateActiveNavigation()
 }

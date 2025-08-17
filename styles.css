@@ -52,6 +52,57 @@
   --color-shadow: rgba(0, 0, 0, 0.3);
 }
 
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.1);
+  backdrop-filter: blur(8px);
+}
+
+.back-to-top:hover {
+  background-color: var(--color-primary);
+  color: white;
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(220, 38, 38, 0.2);
+}
+
+.back-to-top:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--color-primary-lighter);
+}
+
+.back-to-top svg {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.back-to-top:hover svg {
+  transform: scale(0.9);
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
 /* Reset y base */
 * {
   margin: 0;
